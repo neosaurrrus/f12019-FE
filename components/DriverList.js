@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { gql } from 'apollo-boost'
-import { graphql } from 'react-apollo'
+import { graphql} from 'react-apollo'
 
 const GET_DRIVERS_QUERY = gql`
     {
@@ -9,18 +9,32 @@ const GET_DRIVERS_QUERY = gql`
             firstName
             lastName
             nationality
+            team{
+                name
+            }
 
         }
     }
 `
 class DriverList extends Component {
+
+    drivers() {
+        let data = this.props.data
+        if (data.loading) {
+            return <div> Fetching Drivers</div>
+        } else {
+            return data.drivers.map(driver => {
+                return <li key={driver.id}> {driver.firstName} {driver.lastName} - {driver.nationality} - {driver.team.name}</li>
+            })
+        }
+    }
+
     render() {
-        console.log(this.props)
+
         return (
             <div>
                 <ul id="driver-list">
-                   <li>Placeholder drivers</li>
-                   
+                   {this.drivers()}
                 </ul>
             </div>
         );

@@ -6,6 +6,8 @@ import {ApolloProvider} from 'react-apollo'
 //Components
 import DriverList from './DriverList';
 import TeamList from './TeamList';
+import AddDriver from './AddDriver';
+import AddTeam from './AddTeam';
 
 
 //Apollo Client Set up
@@ -24,6 +26,10 @@ class App extends Component {
                     <DriverList/>
                     <h2>Teams</h2>
                     <TeamList/>
+                    <h2>Add a New Driver</h2>
+                    <AddDriver/>
+                    <h2>Add a New Team</h2>
+                    <AddTeam/>
                 </div>
             </ApolloProvider>
 
