@@ -7,6 +7,7 @@ const GET_TEAMS_QUERY = gql`
     teams {
       name
       founded
+      id
     }
   }
 `;
