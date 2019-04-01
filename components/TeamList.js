@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import { gql } from 'apollo-boost'
 import { graphql } from 'react-apollo'
+import { GET_TEAMS_QUERY } from '../queries/queries'
 
-const GET_TEAMS_QUERY = gql`
-  {
-    teams {
-      name
-      founded
-      id
-    }
-  }
-`;
+
 
 class TeamList extends Component {
 

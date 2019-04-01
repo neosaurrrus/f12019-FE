@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
-import { gql } from 'apollo-boost'
-import { graphql} from 'react-apollo'
+import {graphql} from 'react-apollo'
+import DriverDetails from './DriverDetails'
+import {GET_DRIVERS_QUERY} from '../queries/queries'
 
-const GET_DRIVERS_QUERY = gql`
-    {
-        drivers {
-            id
-            firstName
-            lastName
-            nationality
-            team{
-                name
-            }
-
-        }
-    }
-`
 class DriverList extends Component {
+    
+    state = { };
 
     drivers() {
         let data = this.props.data
@@ -24,18 +13,19 @@ class DriverList extends Component {
             return <div> Fetching Drivers</div>
         } else {
             return data.drivers.map(driver => {
-                return <li key={driver.id}> {driver.firstName} {driver.lastName} - {driver.nationality} - {driver.team.name}</li>
+                return <li key={driver.id} onClick={(event)=>{
+                    this.setState({selected: driver.id})
+                }}> {driver.firstName} {driver.lastName} - {driver.nationality} </li>
             })
         }
     }
-
     render() {
-
         return (
             <div>
                 <ul id="driver-list">
                    {this.drivers()}
                 </ul>
+                <DriverDetails driverId={this.state.selected}/>
             </div>
         );
     }

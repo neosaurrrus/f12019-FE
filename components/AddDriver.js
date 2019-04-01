@@ -10,7 +10,7 @@ class AddDriver extends Component {
         firstName: '',
         lastName: '',
         nationality:'',
-        teamId:'Select Team'
+        teamId:'none'
     }
 
     showTeams(){
@@ -31,6 +31,7 @@ class AddDriver extends Component {
 
     submitForm = (event) =>{
         event.preventDefault();
+        if (this.state.teamId === "none") return
         this.props.CREATE_DRIVER_MUTATION({
             variables:{
                 firstName: this.state.firstName,
@@ -60,9 +61,10 @@ class AddDriver extends Component {
             </div>
             <div className="field">
                 <label>Team</label>
-                    <select onChange={ (e) => {this.setState({teamId:e.target.value})}}>
-                    {this.showTeams()}
-                </select>
+                    <select defaultValue="Select a Team" onChange={ (e) => {this.setState({teamId:e.target.value})}}>
+                        <option name="teamId" key={"select"} value={"Select a Team"}>Select a team</option>
+                        {this.showTeams()}
+                  </select>
             </div>
             <button>Add</button>
           </form>
@@ -74,4 +76,3 @@ export default compose(
     graphql(GET_TEAMS_QUERY, {name:"GET_TEAMS_QUERY"}),
     graphql(CREATE_DRIVER_MUTATION, {name:"CREATE_DRIVER_MUTATION"}),
 )(AddDriver);
-
